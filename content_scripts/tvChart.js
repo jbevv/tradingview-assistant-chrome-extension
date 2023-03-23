@@ -10,20 +10,8 @@ tvChart.getTicker = async () => {
   return curTickerName.includes('\n') ?  curTickerName.split('\n')[1] : curTickerName
 }
 
-tvChart.getCurrentTimeFrame = async () => {
-  const isFavoriteTimeframe = await document.querySelector(SEL.chartTimeframeFavorite)
-  const curTimeFrameEl = isFavoriteTimeframe ? await page.waitForSelector(SEL.chartTimeframeActive, 500) :
-    await page.waitForSelector(SEL.chartTimeframeMenuOrSingle, 500)
+tvChart.getCurrentTimeFrame = async () => {}
 
-  if(!curTimeFrameEl || !curTimeFrameEl.innerText) {
-    throw new Error('There is not timeframe element on page. Open correct page please')
-    // return null
-  }
-
-  let curTimeFrameText = curTimeFrameEl.innerText
-  curTimeFrameText = tvChart.correctTF(curTimeFrameText)
-  return curTimeFrameText
-}
 
 tvChart.changeTimeFrame = async (setTF) => {
   const strategyTF = tvChart.correctTF(setTF)
